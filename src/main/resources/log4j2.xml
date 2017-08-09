@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN" packages="io.github.jaeyeolshin.threadcontextexample.appender">
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </Console>
+        <MemoryAppender name="MemoryAppender">
+            <PatternLayout pattern="%msg%n"/>
+            <ThreadContextMapFilter onMatch="ACCEPT" onMismatch="DENY">
+                <KeyValuePair key="debug" value="true"/>
+            </ThreadContextMapFilter>
+        </MemoryAppender>
+    </Appenders>
+    <Loggers>
+        <Logger name="io.github.jaeyeolshin.threadcontextexample" level="DEBUG" additivity="false">
+            <AppenderRef ref="Console" level="DEBUG"/>
+            <AppenderRef ref="MemoryAppender"/>
+        </Logger>
+        <Root level="ERROR">
+            <AppenderRef ref="Console"/>
+        </Root>
+    </Loggers>
+</Configuration>
